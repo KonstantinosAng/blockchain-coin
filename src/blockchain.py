@@ -90,4 +90,3 @@ if __name__ == "__main__":
   block = Block(transactions, TIME(), 3)
   bchain.addBlock(block)
   print(bchain)
-  bchain.generate_keys()
