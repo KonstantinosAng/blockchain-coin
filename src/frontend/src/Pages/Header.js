@@ -15,9 +15,9 @@ function Header() {
 
   return (
     <div className="header__root">
-      <h3> Home </h3>
-      <h3> Transact </h3>
-      <h3> Profile </h3>
+      <h3 href="/"> Home </h3>
+      <h3 href="/transact"> Transact </h3>
+      <h3 href="/profile"> Profile </h3>
       <h3 onClick={signOut}> Log out </h3>
     </div>
   )

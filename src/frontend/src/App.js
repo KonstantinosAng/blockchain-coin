@@ -2,10 +2,12 @@ import './App.css';
 import Header from './Pages/Header.js';
 import Home from './Pages/Home.js';
 import Login from './Pages/Login.js';
+import NotFound from './Pages/NotFound.js';
 import { useStateValue } from './extras/stateProvider.js';
 import { useEffect } from 'react';
 import { auth } from './extras/firebase.js';
 import { actionTypes } from './extras/reducer.js';
+import {Route, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom';
 
 
 function App() {
@@ -30,13 +32,18 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      {!user? <Login/> : (
-        <>
+    <div className="app">
+      {!user ? <Login /> :
+      <>
         <Header />
-        <Home />
-        </>
-      )}
+        <Router>
+          <Switch>
+            <Route path='/' exact component={Home}/>
+            <Route component={NotFound} />
+          </Switch>
+        </Router>
+      </>
+      }
     </div>
   );
 }
