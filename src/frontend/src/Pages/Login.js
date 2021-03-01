@@ -23,7 +23,7 @@ function Login() {
   return (
     <div className="login__root">
       <h1> Login for Cray Coin wallet </h1>
-      <button onCLick={handleLogin} className="login__button"> Sign In </button>
+      <button onClick={handleLogin} className="login__button"> Sign In </button>
     </div>
   )
 }
