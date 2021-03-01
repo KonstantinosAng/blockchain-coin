@@ -1,0 +1,36 @@
+.login__root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  background-color: #111111;
+  height: 100vh;
+  padding: 0 25vw;
+}
+
+.login__root > h1 {
+  color: wheat;
+}
+
+.login__button {
+  display: inline-block;
+  width: 10vw;
+  background-color: gray;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 1rem;
+  cursor: pointer;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login__button:hover {
+  background-color: lightgray;
+}
+
+.login__button:active, .login__button:focus {
+  outline: none;
+}

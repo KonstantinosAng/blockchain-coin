@@ -23,11 +23,11 @@ function Home() {
         <div className="home__block">
           <h2> Block {element.split("%")[0]} </h2>
           <h3> Hash </h3>
-          <h4> {truncate_string(element.split("%")[1], 20)} </h4>
+          <h5> {truncate_string(element.split("%")[1], 20)} </h5>
           <h3> Previous Hash </h3>
-          <h4> {truncate_string(element.split("%")[2], 20)} </h4>
+          <h5> {truncate_string(element.split("%")[2], 20)} </h5>
           <h3> Time </h3>
-          <h4> {element.split("%")[3]} </h4>
+          <h5> {element.split("%")[3]} </h5>
         </div>
       ))}   
     </div>
