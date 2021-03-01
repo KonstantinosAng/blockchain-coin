@@ -14,13 +14,13 @@ class Blockchain(object):
   def __init__(self):
     self.chain = self.init__chain()
     self.pendingTransactions = []
-    self.difficulty = 2
+    self.difficulty = 3
     self.minerRewards = 5
-    self.blockSize = 10
+    self.blockSize = 20
     self.nodes = set()
 
   def __str__(self):
-    return "\n"+"\n\n".join(str(block) for block in self.chain if self.chain != [])
+    return "#".join(str(block) for block in self.chain if self.chain != [])[0:]
 
   def init__chain(self):
     first_block = Block([Transaction('admin', 'random_person', 10)], TIME(), 0)
@@ -61,7 +61,7 @@ class Blockchain(object):
           if transaction.receiver == person:
             balance += transaction.ammount
       except Exception as e:
-        print("No transaction")
+        return None
     
     return f'{person.title()} balance -> {balance}'
 
@@ -76,6 +76,20 @@ class Blockchain(object):
         return False
     
     return True
+
+  def pendingTransaction(self, miner):
+    nPending = len(self.pendingTransactions)
+    if nPending <= 1: return False
+    else:
+      for i in range(0, nPending, self.blockSize):
+        end = i + self.blockSize
+        if i >= nPending: end = nPending
+        blockSlice = self.pendingTransactions[i:end]
+        newBlock = Block(blockSlice, TIME(), len(self.chain))
+        newBlock.previous_hash = self.getLastBlock().hash
+        newBlock.mine(self.difficulty)
+        self.chain.append(newBlock)
+        self.pendingTransactions = [Transaction("Miner Rewards", miner, self.minerRewards)]
 
   def addTransaction(self, sender, receiver, ammount, keyString, senderKey):
     keyByte = keyString.encode("ASCII")
@@ -134,7 +148,7 @@ class Block(object):
     self.hash = self.calculate_hash()
 
   def __str__(self):
-    return f"Block {self.index}:\n hash -> {self.hash}\n prevHash -> {self.previous_hash}\n Time -> {self.time}\n"
+    return f"{self.index}%{self.hash}%{self.previous_hash}%{self.time}"
 
   def calculate_hash(self):
     hashTransactions = ""
@@ -158,7 +172,6 @@ class Block(object):
       self.nonse += 1
       self.hash = self.calculate_hash()
     return True
-
 
 
 class Transaction(object):
@@ -203,4 +216,4 @@ if __name__ == "__main__":
   bchain.addBlock(block)
   print(bchain)
   print(bchain.get_balance("admin"))
-  print(bchain.chain[0].mine(2))
+  print(bchain.chain[0].mine(4))
