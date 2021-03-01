@@ -1,0 +1,29 @@
+.home__root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 100vh;
+  margin: 0 auto;
+  background-color: #111111;
+}
+
+.home__block {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  border: 2px solid whitesmoke;
+  border-radius: 5%;
+  object-fit: contain;
+  height: 250px;
+  padding: 15px;
+  margin: 0 15rem;
+}
+
+.home__block > h3 {
+  text-decoration: underline;
+}
+
+.home__block > h3, h4 {
+  text-align: center;
+  margin-top: 1rem;
+}

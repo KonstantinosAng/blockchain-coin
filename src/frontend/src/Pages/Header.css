@@ -1,0 +1,21 @@
+.header__root {
+  display: flex;
+  flex: 1;
+  background-color: #111111;
+  color: whitesmoke;
+  align-items: center;
+  justify-content: space-evenly;
+  position: sticky;
+  height: 4rem;
+}
+
+.header__root > h3 {
+  cursor: pointer;
+  font-family: Georgia;
+  font-weight: 800;
+  font-size: larger;
+}
+
+.header__root > h3:hover {
+  color: mediumslateblue;
+}
