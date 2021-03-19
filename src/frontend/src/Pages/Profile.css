@@ -22,7 +22,7 @@
   justify-content: left;
 }
 
-.profile__root__column > h2 {
+.profile__root__column > h2, input {
   color: mediumslateblue;
   margin: 1vh 4vw;
 }
@@ -31,4 +31,10 @@
   box-sizing: border-box;
   border: 5px solid midnightblue;
   border-radius: 50%;
+}
+
+.profile__root__column > input {
+  height: 4vh;
+  border-radius: 10px;
+  padding: 4px;
 }

@@ -9,13 +9,13 @@
   height: 4rem;
 }
 
-.header__root > h3 {
+.header__root > h1 {
   cursor: pointer;
   font-family: Georgia;
   font-weight: 800;
-  font-size: larger;
+  font-size: x-large;
 }
 
-.header__root > h3:hover {
+.header__root > h1:hover {
   color: mediumslateblue;
 }

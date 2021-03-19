@@ -24,6 +24,9 @@ def getBalance():
 
 @app.route("/transact", methods=['POST'])
 def transact():
+  sender = request.json['sender']
+  receiver = request.json['receiver']
+  bchain.addTransaction()
   pass
 
 @app.route("/generate_keys")

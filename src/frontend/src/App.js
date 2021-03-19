@@ -9,7 +9,7 @@ import { useStateValue } from './extras/stateProvider.js';
 import { useEffect } from 'react';
 import { auth } from './extras/firebase.js';
 import { actionTypes } from './extras/reducer.js';
-import {Route, BrowserRouter as Router, Switch, Redirect} from 'react-router-dom';
+import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -17,9 +17,10 @@ function App() {
 
   const [{user}, dispatch] = useStateValue();
 
-  useEffect(async () => {
-    if (user) {
-      if (!localStorage.getItem('PubKey')) {
+  useEffect(() => {
+    async function keys() {
+      if (user) {
+        if (!localStorage.getItem('PubKey')) {
           if (!user.publicKey) {
             await axios.get('/generate_keys', {headers: {"Access-Control-Allow-Origin": "*"}}).then(res=> {
               const pubKey = res.data.split("$")[0];
@@ -30,11 +31,13 @@ function App() {
               localStorage.setItem('PriKey', JSON.stringify(priKey))
             })
           }
-      } else {
-        user.publicKey = localStorage.getItem('PubKey');
-        user.privateKey = localStorage.getItem('PriKey');
+        } else {
+          user.publicKey = localStorage.getItem('PubKey');
+          user.privateKey = localStorage.getItem('PriKey');
+        }
       }
     }
+    keys()
   }, [user])
 
   useEffect(() => {
@@ -46,7 +49,8 @@ function App() {
         })
       } else {
         dispatch({
-          type: actionTypes.UNSET_USER
+          type: actionTypes.UNSET_USER,
+          user: null
         })
       }
     })

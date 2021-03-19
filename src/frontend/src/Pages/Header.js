@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Header.css';
 import { useStateValue } from '../extras/stateProvider.js';
 import { actionTypes } from '../extras/reducer.js';
@@ -6,6 +6,16 @@ import { actionTypes } from '../extras/reducer.js';
 function Header() {
 
   const [{user}, dispatch] = useStateValue();
+
+  useEffect(() => {
+    var path;
+    if (window.location.pathname === '/') {
+      path = 'home';
+    } else {
+      path = window.location.pathname.replace('/', "");
+    }
+    document.getElementById('header__'+path).style.color = 'mediumslateblue';
+  }, [])
 
   const signOut = () => {
     dispatch({
@@ -19,10 +29,10 @@ function Header() {
 
   return (
     <div className="header__root">
-      <h3 onClick={()=>redirect('/home')}> Home </h3>
-      <h3 onClick={()=>redirect('/transact')}> Transact </h3>
-      <h3 onClick={()=>redirect('/profile')}> Profile </h3>
-      <h3 onClick={signOut}> Log out </h3>
+      <h1 id="header__home" onClick={()=>redirect('/home')}> Home </h1>
+      <h1 id="header__transact" onClick={()=>redirect('/transact')}> Transact </h1>
+      <h1 id="header__profile" onClick={()=>redirect('/profile')}> Profile </h1>
+      <h1 onClick={signOut}> Log out </h1>
     </div>
   )
 }
