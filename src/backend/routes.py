@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from blockchain import Blockchain, Transaction, Block, TIME
 import json
 
@@ -15,6 +15,20 @@ def home():
   bchain.conflicts()
   return str(bchain)
 
+
+@app.route("/balance", methods=['POST'])
+def getBalance():
+  person = request.json['data']
+  balance = bchain.get_balance(person)
+  return balance
+
+@app.route("/transact", methods=['POST'])
+def transact():
+  pass
+
+@app.route("/generate_keys")
+def generateKeys():
+  return bchain.generate_keys()
 
 if __name__ == "__main__":
   app.run(port=3000, debug=True)

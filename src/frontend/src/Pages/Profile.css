@@ -2,4 +2,33 @@
   height: 100vh;
   width: 100%;
   background-color: #111111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.profile__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 80vw;
+}
+
+.profile__root__column {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+.profile__root__column > h2 {
+  color: mediumslateblue;
+  margin: 1vh 4vw;
+}
+
+.profile__container > img {
+  box-sizing: border-box;
+  border: 5px solid midnightblue;
+  border-radius: 50%;
 }

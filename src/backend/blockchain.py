@@ -39,15 +39,15 @@ class Blockchain(object):
   
   def generate_keys(self):
     key = RSA.generate(2048)
-    private_key = key.export_key()
-    with open('private.pem', 'wb') as private_key_file:
-      private_key_file.write(private_key)
+    # private_key = key.export_key()
+    # with open('private.pem', 'wb') as private_key_file:
+    #   private_key_file.write(private_key)
     
-    public_key = key.publickey().export_key()
-    with open('public.pem', 'wb') as public_key_file:
-      public_key_file.write(public_key)
+    # public_key = key.publickey().export_key()
+    # with open('public.pem', 'wb') as public_key_file:
+    #   public_key_file.write(public_key)
     
-    return key.publickey().export_key().decode('ASCII')
+    return f"{key.publickey().export_key().decode('ASCII')}${key.export_key().decode('ASCII')}"
   
   def get_balance(self, person):
     balance = 0
