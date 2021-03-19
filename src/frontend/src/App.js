@@ -2,6 +2,8 @@ import './App.css';
 import Header from './Pages/Header.js';
 import Home from './Pages/Home.js';
 import Login from './Pages/Login.js';
+import Profile from './Pages/Profile.js';
+import Transact from './Pages/Transact.js';
 import NotFound from './Pages/NotFound.js';
 import { useStateValue } from './extras/stateProvider.js';
 import { useEffect } from 'react';
@@ -39,6 +41,9 @@ function App() {
         <Router>
           <Switch>
             <Route path='/' exact component={Home}/>
+            <Route path='/home' exact component={Home}/>
+            <Route path='/profile' exact component={Profile}/>
+            <Route path='/transact' exact component={Transact}/>
             <Route component={NotFound} />
           </Switch>
         </Router>
