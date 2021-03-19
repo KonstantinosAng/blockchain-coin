@@ -20,7 +20,7 @@ class Blockchain(object):
     self.nodes = set()
 
   def __str__(self):
-    return "#".join(str(block) for block in self.chain if self.chain != [])[0:]
+    return "#".join(str(block) for block in reversed(self.chain) if self.chain != [])[0:]
 
   def init__chain(self):
     first_block = Block([Transaction('admin', 'random_person', 10)], TIME(), 0)
