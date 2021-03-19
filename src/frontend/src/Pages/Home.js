@@ -7,10 +7,13 @@ function Home() {
 
   const [chain, setChain] = useState([]);
 
-  useEffect(async () => {
-    await axios.get('/home', {headers: {"Access-Control-Allow-Origin": "*"}}).then((response)=>{
-      setChain(response.data.split("#"));
-    })
+  useEffect(() => {
+    async function getData() {
+      await axios.get('/home', {headers: {"Access-Control-Allow-Origin": "*"}}).then((response)=>{
+        setChain(response.data.split("#"));
+      })
+    }
+    getData();
   }, [])
   
   function truncate_string(str, n) {

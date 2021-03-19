@@ -9,16 +9,19 @@ function Profile() {
   const [ammount, setAmmount] = useState('');
   const [signedName, setSignedName] = useState('');
 
-  useEffect(async () => {
-    await axios.post('/balance', {headers: {"Access-Control-Allow-Origin": "*"}, data: user.displayName}).then(res=> {
-      if (res.data.length >= 0) {
-        setSignedName(user.displayName);
-        setAmmount(Number((res.data).match(/\d+$/)));
-      } else {
-        setSignedName('');
-        setAmmount('0');
-      }
-    })
+  useEffect(() => {
+    async function getBalanceData() {
+      await axios.post('/balance', {headers: {"Access-Control-Allow-Origin": "*"}, data: user.displayName}).then(res=> {
+        if (res.data.length >= 0) {
+          setSignedName(user.displayName);
+          setAmmount(Number((res.data).match(/\d+$/)));
+        } else {
+          setSignedName('');
+          setAmmount('0');
+        }
+      })
+    }
+    getBalanceData()
   }, [])
 
   return (
