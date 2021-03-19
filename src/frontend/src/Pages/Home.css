@@ -23,7 +23,7 @@
   text-decoration: underline;
 }
 
-.home__block > h3, h4 {
+.home__block > h3, h4, h5 {
   text-align: center;
   margin-top: 1rem;
 }
