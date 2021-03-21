@@ -1,16 +1,86 @@
+body {
+  background-color: #111111;
+}
+
 .mine__root {
   background-color: #111111;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .mine__container {
-  margin-top: 3rem;
+  margin: 2vh 0;
 }
 
 .mine__container > h2 {
   color: #ffffff;
   text-align: center;
+}
+
+.block__row {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2vh 0;
+  text-align: center;
+}
+
+.block__col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.mine__block {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: space-evenly;
+  color: #fff;
+  border: 2px solid whitesmoke;
+  border-radius: 1%;
+  object-fit: contain;
+  height: 350px;
+  width: 400px;
+  padding: 15px;
+  margin: 2vh 20rem;
+  cursor: pointer;
+}
+
+.mine__block:hover {
+  box-shadow: 0 0 10px 10px rgba(220, 220, 220, 0.1);
+}
+
+.mine__block > h3 {
+  text-decoration: underline;
+}
+
+.mine__block > h3, h4, h5 {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.mine__block > h5, .block__col > h5, .block__row > h5 {
+  color: mediumpurple;
+}
+
+.mine__block__overlay {
+  position: relative;
+  object-fit: contain;
+  top: -50%;
+  align-self: center;
+  text-align: center;
+  justify-content: center;
+  display: none;
+  backdrop-filter: grayscale(10px) blur(2px);
+  color: mediumpurple;
+  font-size: 1.5rem;
+  margin: auto auto;
+  font-weight: bold;
+  -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  -o-transition: all 2s ease-out;
+  -ms-transition: all 2s ease-out;
+  transition: all .5s ease-out;
 }

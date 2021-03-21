@@ -108,7 +108,7 @@ class Blockchain(object):
 
     if not transaction.isValidTransaction():
       return False
-    
+
     self.pendingTransactions.append(transaction)
     return len(self.chain) + 1
   
@@ -185,7 +185,7 @@ class Transaction(object):
     self.time = TIME()
     self.hash = self.calculate_hash()
     self.signature = ""
-    self.validation = '✔' if self.isValidTransaction() else '❌'
+    self.validation = ''
 
   def __str__(self):
     return f"{self.sender}%{self.receiver}%{self.amount}%{self.time}%{self.hash}%{self.validation}"
@@ -198,8 +198,12 @@ class Transaction(object):
   def isValidTransaction(self):
     if self.hash != self.calculate_hash() or self.sender == self.receiver or \
        not self.sender or len(self.signature) == 0:
+          self.validation = '❌'
           return False
-    if self.sender == "Miner rewards": return True
+    if self.sender == "Miner rewards": 
+      self.validation = '✔'
+      return True
+    self.validation = '✔'
     return True
   
   def signTransaction(self, key, senderKey):
