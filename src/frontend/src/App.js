@@ -4,6 +4,7 @@ import Home from './Pages/Home.js';
 import Login from './Pages/Login.js';
 import Profile from './Pages/Profile.js';
 import Transact from './Pages/Transact.js';
+import Mine from './Pages/Mine.js';
 import NotFound from './Pages/NotFound.js';
 import { useStateValue } from './extras/stateProvider.js';
 import { useEffect } from 'react';
@@ -68,6 +69,7 @@ function App() {
             <Route path='/home' exact component={Home}/>
             <Route path='/profile' exact component={Profile}/>
             <Route path='/transact' exact component={Transact}/>
+            <Route path='/mine' exact component={Mine}/>
             <Route component={NotFound} />
           </Switch>
         </Router>

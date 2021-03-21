@@ -31,6 +31,7 @@ function Header() {
     <div className="header__root">
       <h1 id="header__home" onClick={()=>redirect('/home')}> Home </h1>
       <h1 id="header__transact" onClick={()=>redirect('/transact')}> Transact </h1>
+      <h1 id="header__mine" onClick={()=>redirect('/mine')}> Mine </h1>
       <h1 id="header__profile" onClick={()=>redirect('/profile')}> Profile </h1>
       <h1 onClick={signOut}> Log out </h1>
     </div>

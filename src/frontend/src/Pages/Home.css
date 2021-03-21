@@ -1,10 +1,16 @@
 .home__root {
   display: flex;
+  height: 100vh;
+  background-color: #111111;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 100vh;
-  margin: 0 auto;
-  background-color: #111111;
+  flex: .5;
+}
+
+.home__finished > h2 {
+  margin: 3vh auto;
+  color: #fff;
+  text-align: center;
 }
 
 .home__block {
@@ -16,7 +22,12 @@
   object-fit: contain;
   height: 250px;
   padding: 15px;
-  margin: 0 15rem;
+  margin: 1vh 20rem;
+  cursor: pointer;
+}
+
+.home__block:hover {
+  box-shadow: 0 0 10px 10px rgba(220, 220, 220, 0.1);
 }
 
 .home__block > h3 {
@@ -26,4 +37,36 @@
 .home__block > h3, h4, h5 {
   text-align: center;
   margin-top: 1rem;
+}
+
+.home__pending {
+  flex: .5;
+  display: flex;
+  flex-direction: column;
+}
+
+.home__pending > h2 {
+  color: #fff;
+  text-align: center;
+  margin: 3vh auto;
+}
+
+.home__block__overlay {
+  position: relative;
+  object-fit: contain;
+  top: -50%;
+  align-self: center;
+  text-align: center;
+  justify-content: center;
+  display: none;
+  backdrop-filter: grayscale(10px) blur(2px);
+  color: mediumpurple;
+  font-size: 1.5rem;
+  margin: auto auto;
+  font-weight: bold;
+  -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  -o-transition: all 2s ease-out;
+  -ms-transition: all 2s ease-out;
+  transition: all .5s ease-out;
 }

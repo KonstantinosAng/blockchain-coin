@@ -27,7 +27,7 @@ function Profile() {
   return (
     <div className="profile__root">
       <div className="profile__container">
-        <img alt="profile picture" src={user.photoURL}/>
+        <img alt="profile" src={user.photoURL}/>
         <div className="profile__root__column">
           <h2> {user.displayName} </h2>
           <h2> Signed name: {signedName} </h2>

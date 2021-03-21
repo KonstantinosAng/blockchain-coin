@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request
 from blockchain import Blockchain, Transaction, Block, TIME
 import json
+from Crypto.PublicKey import RSA
+import os
+import re
 
 
 app = Flask(__name__)
@@ -18,20 +21,32 @@ def home():
 
 @app.route("/balance", methods=['POST'])
 def getBalance():
-  person = request.json['data']
-  balance = bchain.get_balance(person)
-  return balance
+  try:
+    person = request.json['data']
+    balance = bchain.get_balance(person)
+    return balance
+  except Exception:
+    return 'Error 400!'
 
 @app.route("/transact", methods=['POST'])
 def transact():
-  sender = request.json['sender']
-  receiver = request.json['receiver']
-  bchain.addTransaction()
-  pass
+  try:
+    sender = request.json['sender']
+    receiver = request.json['receiver']
+    amount = request.json['amount']
+    key = request.json['key'][1:-1].strip().replace(r"\n", "\n")  
+    bchain.addTransaction(sender, receiver, amount, key, key)
+    return 'OK'
+  except Exception:
+    return 'Error 400!'
 
 @app.route("/generate_keys")
 def generateKeys():
   return bchain.generate_keys()
+
+@app.route("/pendingTransactions")
+def pending():
+  return str(bchain.getPendingTransactions())
 
 if __name__ == "__main__":
   app.run(port=3000, debug=True)

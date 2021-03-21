@@ -1,15 +1,43 @@
 import React, { useEffect } from 'react'
 import './Transact.css';
 import axios from 'axios';
+import { useStateValue } from '../extras/stateProvider.js';
+
 
 function Transact() {
 
+  const [{ user }, dispatch] = useStateValue();
+
+  useEffect(() => {
+    async function keys() {
+      if (user) {
+        if (!localStorage.getItem('PubKey')) {
+          if (!user.publicKey) {
+            await axios.get('/generate_keys', {headers: {"Access-Control-Allow-Origin": "*"}}).then(res=> {
+              const pubKey = res.data.split("$")[0];
+              const priKey = res.data.split("$")[1];
+              user.publicKey = pubKey;
+              user.privateKey = priKey;
+              localStorage.setItem('PubKey', JSON.stringify(pubKey))
+              localStorage.setItem('PriKey', JSON.stringify(priKey))
+            })
+          }
+        } else {
+          user.publicKey = localStorage.getItem('PubKey');
+          user.privateKey = localStorage.getItem('PriKey');
+        }
+      }
+    }
+    keys()
+  }, [])
+
   async function handleSubmit(event) {
     event.preventDefault();
-    const sender = document.getElementsByClassName('transact__sender')[0].value;
-    const receiver = document.getElementsByClassName('transact__receiver')[0].value;
-    const amount = document.getElementsByClassName('transact__amount')[0].value;
-    // await axios.post('/transact', {headers: {"Access-Control-Allow-Origin": "*"}, sender: s, receiver: r, amount: a})
+    const s = document.getElementsByClassName('transact__sender')[0].value;
+    const r = document.getElementsByClassName('transact__receiver')[0].value;
+    const a = document.getElementsByClassName('transact__amount')[0].value;
+    const k = user.publicKey;
+    await axios.post('/transact', {headers: {"Access-Control-Allow-Origin": "*"}, sender: s, receiver: r, amount: a, key: k}).then((res)=>console.log(res))
   }
 
   return (

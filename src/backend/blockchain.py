@@ -22,8 +22,11 @@ class Blockchain(object):
   def __str__(self):
     return "#".join(str(block) for block in reversed(self.chain) if self.chain != [])[0:]
 
+  def getPendingTransactions(self):    
+    return "#".join(str(transaction) for transaction in self.pendingTransactions)
+
   def init__chain(self):
-    first_block = Block([Transaction('admin', 'random_person', 10)], TIME(), 0)
+    first_block = Block([Transaction('admin', 'admin', 10)], TIME(), 0)
     first_block.previous_hash = 'None'
     return [first_block]
 
@@ -57,9 +60,9 @@ class Blockchain(object):
         for j in range(len(block.transactions)):
           transaction = block.transactions[j]
           if transaction.sender == person:
-            balance -= transaction.ammount
+            balance -= transaction.amount
           if transaction.receiver == person:
-            balance += transaction.ammount
+            balance += transaction.amount
       except Exception as e:
         return None
     
@@ -91,17 +94,16 @@ class Blockchain(object):
         self.chain.append(newBlock)
         self.pendingTransactions = [Transaction("Miner Rewards", miner, self.minerRewards)]
 
-  def addTransaction(self, sender, receiver, ammount, keyString, senderKey):
+  def addTransaction(self, sender, receiver, amount, keyString, senderKey):
     keyByte = keyString.encode("ASCII")
     senderKeyByte = senderKey.encode("ASCII")
-
     key = RSA.import_key(keyByte)
     senderKey = RSA.import_key(senderKeyByte)
 
-    if not sender or not receiver or not ammount:
+    if not sender or not receiver or not amount:
       return False
     
-    transaction = Transaction(sender, receiver, ammount)
+    transaction = Transaction(sender, receiver, amount)
     transaction.signTransaction(key, senderKey)
 
     if not transaction.isValidTransaction():
@@ -148,7 +150,7 @@ class Block(object):
     self.hash = self.calculate_hash()
 
   def __str__(self):
-    return f"{self.index}%{self.hash}%{self.previous_hash}%{self.time}"
+    return f"{self.index}%{self.hash}%{self.previous_hash}%{self.time}%{self.transactions[0].sender}%{self.transactions[0].receiver}%{self.transactions[0].amount}"
 
   def calculate_hash(self):
     hashTransactions = ""
@@ -176,16 +178,20 @@ class Block(object):
 
 class Transaction(object):
   
-  def __init__(self, sender, receiver, ammount):
+  def __init__(self, sender, receiver, amount):
     self.sender = sender
     self.receiver = receiver
-    self.ammount = ammount
+    self.amount = amount
     self.time = TIME()
     self.hash = self.calculate_hash()
-    self.signature = None
+    self.signature = ""
+    self.validation = '✔' if self.isValidTransaction() else '❌'
+
+  def __str__(self):
+    return f"{self.sender}%{self.receiver}%{self.amount}%{self.time}%{self.hash}%{self.validation}"
 
   def calculate_hash(self):
-    hashString = self.sender + self.receiver + str(self.ammount) + str(self.time)
+    hashString = self.sender + self.receiver + str(self.amount) + str(self.time)
     hashEncoded = json.dumps(hashString, sort_keys=True).encode()
     return hashlib.sha256(hashEncoded).hexdigest()
 
