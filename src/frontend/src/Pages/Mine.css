@@ -65,6 +65,11 @@ body {
   color: mediumpurple;
 }
 
+
+.mine__block:hover > h5, .block__col > h5, .block__row > h5 {
+  color: rgba(255, 255, 255, 10%)!important;
+}
+
 .mine__block__overlay {
   position: relative;
   object-fit: contain;
@@ -73,7 +78,7 @@ body {
   text-align: center;
   justify-content: center;
   display: none;
-  backdrop-filter: grayscale(10px) blur(2px);
+  backdrop-filter: grayscale(10px) blur(10px);
   color: mediumpurple;
   font-size: 1.5rem;
   margin: auto auto;

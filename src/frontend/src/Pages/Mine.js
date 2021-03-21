@@ -5,6 +5,7 @@ import axios from 'axios';
 function Mine() {
 
   const [data, setData] = useState([])
+  const [overlay, setOverlay] = useState(false)
 
   useEffect(() => {
     async function getPendingTransacs() {
@@ -18,15 +19,17 @@ function Mine() {
   function truncate_string(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." + str.substr(str.length-20, str.length): str;
   }
-
+  console.log(overlay);
   function handleOverlayShow(element) {
-    document.getElementsByClassName(`home__block__overlay${element.split("%")[0]}`)[0].style.display = 'flex';
-    document.getElementsByClassName(`home__block${element.split("%")[0]}`)[0].style.color = 'rgba(255, 255, 255, 10%)';
+    document.getElementsByClassName(`mine__block__overlay${element.split("%")[4]}`)[0].style.display = 'flex';
+    document.getElementsByClassName(`mine__block${element.split("%")[4]}`)[0].style.color = 'rgba(255, 255, 255, 10%)';
+    setOverlay(true)
   }
 
   function handleOverlayHide(element) {
-    document.getElementsByClassName(`home__block__overlay${element.split("%")[0]}`)[0].style.display = 'none';
-    document.getElementsByClassName(`home__block${element.split("%")[0]}`)[0].style.color = 'rgba(255, 255, 255, 100%)'
+    document.getElementsByClassName(`mine__block__overlay${element.split("%")[4]}`)[0].style.display = 'none';
+    document.getElementsByClassName(`mine__block${element.split("%")[4]}`)[0].style.color = 'rgba(255, 255, 255, 100%)'
+    setOverlay(false)
   }
 
   return (
@@ -34,7 +37,7 @@ function Mine() {
       <div className="mine__container">
         <h2> Pending Transactions </h2>
         {data?.map((element) => (
-          <div className={`mine__block mine__block${element.split("%")[4]}`}>
+          <div onMouseOver={()=>handleOverlayShow(element)} onMouseOut={()=>handleOverlayHide(element)} className={`mine__block mine__block${element.split("%")[4]}`}>
             <h2> Pending Transaction </h2>
             <div className="block__row">
               <div className="block__col">
