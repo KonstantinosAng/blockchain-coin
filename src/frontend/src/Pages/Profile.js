@@ -23,13 +23,8 @@ function Profile() {
         }
         localStorage.setItem('balance', JSON.stringify(amount))
       })
-    }
-    if (localStorage.getItem('balance')) {
-      setSignedName(user.displayName);
-      setAmmount(JSON.parse(localStorage.getItem('balance')));
-    } else {
-      getBalanceData()
-    }
+    }    
+    getBalanceData()
   }, [])
 
   return (

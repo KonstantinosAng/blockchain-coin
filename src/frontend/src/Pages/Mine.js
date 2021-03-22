@@ -42,7 +42,9 @@ function Mine() {
   }
 
   async function handleMining(hash) {
-    await axios.post('/mining', {headers: {"Access-Control-Allow-Origin": "*"}, hash: hash, miner: user.displayName}).then((res)=>console.log('OK'))
+    await axios.post('/mining', {headers: {"Access-Control-Allow-Origin": "*"}, hash: hash, miner: user.displayName}).then((res)=> {
+      console.log(res.data);
+    })
   }
 
   return (

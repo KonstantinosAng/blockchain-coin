@@ -14,7 +14,7 @@ class Blockchain(object):
   def __init__(self):
     self.chain = self.init__chain()
     self.pendingTransactions = []
-    self.difficulty = 3
+    self.difficulty = 10
     self.minerRewards = 5
     self.blockSize = 20
     self.nodes = set()
@@ -57,7 +57,6 @@ class Blockchain(object):
       balance = 0
       for block in self.chain:
         for transaction in block.transactions:
-          print(transaction.sender, transaction.receiver, transaction.amount, person)
           if transaction.sender == person:
             balance -= int(transaction.amount)
           if transaction.receiver == person:
@@ -79,7 +78,6 @@ class Blockchain(object):
     return True
   
   def mineBlock(self, _hash, miner):
-    print(self.chain)
     try:
       for transaction in self.pendingTransactions:
         if transaction.hash == _hash:
@@ -87,7 +85,6 @@ class Blockchain(object):
           newBlock.previous_hash = self.getLastBlock().hash
           newBlock.mine(self.difficulty)
           self.chain.append(newBlock)
-          print(self.chain)
           self.pendingTransactions = [Transaction("Miner Rewards", miner, self.minerRewards)]
           return 'OK'
         else:

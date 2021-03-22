@@ -37,19 +37,27 @@ function Transact() {
     const r = document.getElementsByClassName('transact__receiver')[0].value;
     const a = document.getElementsByClassName('transact__amount')[0].value;
     const k = user.publicKey;
-    await axios.post('/transact', {headers: {"Access-Control-Allow-Origin": "*"}, sender: s, receiver: r, amount: a, key: k}).then((res)=> {
-      if (res.data === 'OK') {
-        document.getElementById('transact__message').innerText = 'Transaction added!';
-        document.getElementById('transact__message').style.backgroundColor = 'limegreen';
-        document.getElementById('transact__message').style.display = 'flex';
-        document.getElementById('transact__message').style.animation = 'fadeOut 2s';
-      } else {
-        document.getElementById('transact__message').innerText = 'Transaction failed!';
-        document.getElementById('transact__message').style.backgroundColor = 'rosybrown';
-        document.getElementById('transact__message').style.display = 'flex';
-        document.getElementById('transact__message').style.animation = 'fadeOut 2s';
-      }
-    })
+    const balance = JSON.parse(localStorage.getItem('balance'));
+    if (parseFloat(a) > balance) {
+      document.getElementById('transact__message').innerText = 'Not enough coins!';
+      document.getElementById('transact__message').style.backgroundColor = 'rosybrown';
+      document.getElementById('transact__message').style.display = 'flex';
+      document.getElementById('transact__message').style.animation = 'fadeOut 5s';
+    } else {
+      await axios.post('/transact', {headers: {"Access-Control-Allow-Origin": "*"}, sender: s, receiver: r, amount: a, key: k}).then((res)=> {
+        if (res.data === 'OK') {
+          document.getElementById('transact__message').innerText = 'Transaction added!';
+          document.getElementById('transact__message').style.backgroundColor = 'limegreen';
+          document.getElementById('transact__message').style.display = 'flex';
+          document.getElementById('transact__message').style.animation = 'fadeOut 2s';
+        } else {
+          document.getElementById('transact__message').innerText = 'Transaction failed!';
+          document.getElementById('transact__message').style.backgroundColor = 'rosybrown';
+          document.getElementById('transact__message').style.display = 'flex';
+          document.getElementById('transact__message').style.animation = 'fadeOut 2s';
+        }
+      })
+    }
   }
 
   function handleValidationDigits(event) {
@@ -68,7 +76,7 @@ function Transact() {
     <div className="transact__root">
       <div className="transact__container">
         <h2> Sender </h2>
-        <input value={user.displayName} className="transact__sender" required/>
+        <input value={user.displayName} className="transact__sender" readOnly/>
         <h2> Receiver </h2>
         <input className="transact__receiver" required/>
         <h2> Amount </h2>
