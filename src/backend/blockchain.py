@@ -22,7 +22,7 @@ class Blockchain(object):
     return "#".join(str(block) for block in reversed(self.chain) if self.chain != [])[0:]
 
   def getPendingTransactions(self):    
-    return "#".join(str(transaction) for transaction in self.pendingTransactions)
+    return "#".join(str(transaction) for transaction in self.pendingTransactions)[0:]
 
   def init__chain(self):
     first_block = Block([Transaction('admin', 'admin', 10)], TIME(), 0)
@@ -126,8 +126,9 @@ class Blockchain(object):
   def conflicts(self):
     try:
       for i in range(len(self.chain)-1):
+        print(self.chain[i].hash)
         if self.chain[i].hash == self.chain[i+1].hash:
-          self.chain.pop(i+1)
+          self.chain.pop(i)
     except Exception as e:
       return e    
 
@@ -138,7 +139,7 @@ class Block(object):
     self.previous_hash = ''
     self.time = time
     self.index = index
-    self.nonse = 0;
+    self.nonse = 0
     self.hash = self.calculate_hash()
 
   def __str__(self):

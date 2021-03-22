@@ -75,6 +75,7 @@ function Mine() {
     await axios.get('/pendingTransactions', {headers: {"Access-Control-Allow-Origin": "*"}}).then((res) => {
       setData(res.data.split("#"))
     });
+    window.location.reload();
   }
 
   return (
