@@ -12,16 +12,24 @@ function Profile() {
   useEffect(() => {
     async function getBalanceData() {
       await axios.post('/balance', {headers: {"Access-Control-Allow-Origin": "*"}, data: user.displayName}).then(res=> {
+        var amount = 0;
         if (res.data.length >= 0) {
+          amount = res.data.replace(user.displayName, "").replace("->", "").replace("balance", "").trim()
           setSignedName(user.displayName);
-          setAmmount(Number((res.data).match(/\d+$/)));
+          setAmmount(amount);
         } else {
           setSignedName('');
-          setAmmount('0');
+          setAmmount(amount);
         }
+        localStorage.setItem('balance', JSON.stringify(amount))
       })
     }
-    getBalanceData()
+    if (localStorage.getItem('balance')) {
+      setSignedName(user.displayName);
+      setAmmount(JSON.parse(localStorage.getItem('balance')));
+    } else {
+      getBalanceData()
+    }
   }, [])
 
   return (

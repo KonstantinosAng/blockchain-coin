@@ -52,6 +52,18 @@ function Transact() {
     })
   }
 
+  function handleValidationDigits(event) {
+    if (event.target.value === "") {
+      document.getElementsByClassName('transact__amount')[0].style.backgroundColor = "white";
+    } else {
+      if (!isNaN(event.target.value)) {
+        document.getElementsByClassName('transact__amount')[0].style.backgroundColor = "white";
+      } else {
+        document.getElementsByClassName('transact__amount')[0].style.backgroundColor = "#FF3366";
+      }
+    }
+  }
+
   return (
     <div className="transact__root">
       <div className="transact__container">
@@ -60,7 +72,7 @@ function Transact() {
         <h2> Receiver </h2>
         <input className="transact__receiver" required/>
         <h2> Amount </h2>
-        <input className="transact__amount" required/>
+        <input onChange={(event)=>handleValidationDigits(event)} className="transact__amount" required/>
         <button onClick={(e)=>handleSubmit(e)} className="transact__button"> Transact </button>
         <h3 id="transact__message" className="transaction__message"> Transaction added! </h3>
       </div>
