@@ -9,8 +9,6 @@ import re
 app = Flask(__name__)
 
 bchain = Blockchain()
-block = Block([Transaction("admin", "Kwstantinos Angelopoulos", 10000)], TIME(), 1)
-bchain.addBlock(block)
 
 @app.route("/")
 @app.route("/home")

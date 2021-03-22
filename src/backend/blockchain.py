@@ -75,7 +75,7 @@ class Blockchain(object):
     return "#".join(str(transaction) for transaction in self.pendingTransactions)[0:]
 
   def init__chain(self):
-    first_block = Block([Transaction('admin', 'admin', 10)], TIME(), 0)
+    first_block = Block([Transaction('admin', 'Kwstantinos Angelopoulos', 10000)], TIME(), 0)
     first_block.previous_hash = 'None'
     return [first_block]
 
@@ -154,7 +154,7 @@ class Blockchain(object):
         newBlock.previous_hash = self.getLastBlock().hash
         newBlock.mine(self.difficulty)
         self.chain.append(newBlock)
-        # self.pendingTransactions = [Transaction("Miner Rewards", miner, self.minerRewards)]
+        self.pendingTransactions = [Transaction("Miner Rewards", miner, self.minerRewards)]
 
   def addTransaction(self, sender, receiver, amount, keyString, senderKey):
     keyByte = keyString.encode("ASCII")
