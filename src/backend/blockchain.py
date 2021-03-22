@@ -17,7 +17,6 @@ class Blockchain(object):
     self.difficulty = 4
     self.minerRewards = 5
     self.blockSize = 20
-    self.nodes = set()
 
   def __str__(self):
     return "#".join(str(block) for block in reversed(self.chain) if self.chain != [])[0:]
@@ -104,7 +103,7 @@ class Blockchain(object):
         newBlock.previous_hash = self.getLastBlock().hash
         newBlock.mine(self.difficulty)
         self.chain.append(newBlock)
-        self.pendingTransactions = [Transaction("Miner Rewards", miner, self.minerRewards)]
+        # self.pendingTransactions = [Transaction("Miner Rewards", miner, self.minerRewards)]
 
   def addTransaction(self, sender, receiver, amount, keyString, senderKey):
     keyByte = keyString.encode("ASCII")
@@ -124,32 +123,13 @@ class Blockchain(object):
     self.pendingTransactions.append(transaction)
     return len(self.chain) + 1
   
-  def register_node(self, address):
-    parsedUrl = urlparse(address)
-    self.nodes.add(parsedUrl.netloc)
-  
   def conflicts(self):
-    nodes = self.nodes
-    newChain = None
-
-    maxLength = len(self.chain)
-
-    for node in nodes:
-      response = requests.get(f"http://{node}/chain")
-
-      if response.status_code == 200:
-        length = response.json()['length']
-        chain = response.json()['chain']
-
-        if length > maxLength and self.isValidChain():
-          maxLength = length
-          newChain = chain
-    
-    if newChain: 
-      self.chain = newChain
-      return True
-    
-    return False
+    try:
+      for i in range(len(self.chain)-1):
+        if self.chain[i].hash == self.chain[i+1].hash:
+          self.chain.pop(i+1)
+    except Exception as e:
+      return e    
 
 class Block(object):
   

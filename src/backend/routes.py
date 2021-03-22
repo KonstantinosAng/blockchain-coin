@@ -17,7 +17,7 @@ bchain.addBlock(block)
 @app.route("/")
 @app.route("/home")
 def home():
-  bchain.conflicts()
+  # bchain.conflicts()
   return str(bchain)
 
 

@@ -64,10 +64,7 @@ function Mine() {
     document.getElementsByClassName(`mine__block__success${hash}`)[0].style.display = 'flex';
     await axios.post('/mining', {headers: {"Access-Control-Allow-Origin": "*"}, hash: hash, miner: user.displayName}).then((res)=> {
       console.log(res.data == 'OK');
-      if (res.data == 'OK') {
-        document.getElementsByClassName(`mine__block__success${hash}`)[0].innerText = 'Mined successfully!';
-        document.getElementsByClassName(`mine__block__success${hash}`)[0].style.display = 'flex';
-      } else {
+      if (!res.data == 'OK') {
         document.getElementsByClassName(`mine__block__success${hash}`)[0].style.display = 'none';
       }
     })
