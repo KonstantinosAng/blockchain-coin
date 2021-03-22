@@ -14,13 +14,13 @@ pip install -r requirements.txt
 ## Usage
 
 
-Inside the [backend folder]()
+Inside the [backend folder](src/backend)
 
 ```
 flask run
 ```
 
-Assuming you have [npm](https://www.npmjs.com/) installed, inside the [frontend folder](srcc/frontend) run the following code to start the frontend page.
+Assuming you have [npm](https://www.npmjs.com/) installed, inside the [frontend folder](src/frontend) run the following code to start the frontend page.
 
 ```
 npm start
