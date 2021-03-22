@@ -61,7 +61,7 @@ body {
   margin-top: 1rem;
 }
 
-h5 {
+.mine__block > h5 {
   color: mediumpurple;
 }
 
@@ -116,4 +116,24 @@ h5 {
 
 .mine__no__transactions:hover > button:hover {
   background-color: darkviolet;
+}
+
+.mine__block__success {
+  position: relative;
+  object-fit: contain;
+  top: -50%;
+  align-self: center;
+  text-align: center;
+  justify-content: center;
+  display: none;
+  backdrop-filter: grayscale(10px) blur(10px);
+  color: limegreen;
+  font-size: 1.5rem;
+  margin: auto auto;
+  font-weight: bold;
+  -webkit-transition: all 2s ease-out;
+  -moz-transition: all 2s ease-out;
+  -o-transition: all 2s ease-out;
+  -ms-transition: all 2s ease-out;
+  transition: all .5s ease-out;
 }

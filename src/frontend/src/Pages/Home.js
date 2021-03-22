@@ -21,7 +21,7 @@ function Home() {
   }
 
   function handleBlockDetail(element) {
-    const blockId = element.split("%")[0] 
+    const blockId = element.split("%")[0];
     if (document.getElementById('hashSender'+blockId).innerText === 'Hash') {
       document.getElementById('hashSender'+blockId).innerText = 'Sender';
       document.getElementById('hashSenderValue'+blockId).innerText = element.split("%")[4];
@@ -40,8 +40,10 @@ function Home() {
   }
 
   function handleOverlayShow(element) {
+    const blockId = element.split("%")[0];
     document.getElementsByClassName(`home__block__overlay${element.split("%")[0]}`)[0].style.display = 'flex';
     document.getElementsByClassName(`home__block${element.split("%")[0]}`)[0].style.color = 'rgba(255, 255, 255, 10%)';
+
   }
 
   function handleOverlayHide(element) {
