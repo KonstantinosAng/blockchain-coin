@@ -41,5 +41,7 @@ If it is installed you will see a big output. More info in [MongoDB/Installation
 The frontend page provides a UI for making transactions, monitoring the public ladger, mine blocks and watch your profile and amount.
 
 <p align="center">
-  <img src="img/img.png" /> 
+  <img src="img/img1.png" /> 
+  <img src="img/img2.png" /> 
+  <img src="img/img3.png" /> 
 </p>
