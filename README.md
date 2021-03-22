@@ -1,6 +1,6 @@
 # Cray coin
 
-A full fledge blockchain coin named cray with [Flask](https://flask.palletsprojects.com/en/1.1.x/) backend, [ReactJS](https://reactjs.org/) for frontend, [MongoDB](https://www.mongodb.com/) for storing and [Firebase](https://firebase.google.com) for authentication and Log in functionality.
+A full fledge blockchain coin named cray with [Flask](https://flask.palletsprojects.com/en/1.1.x/) for backend, [ReactJS](https://reactjs.org/) for frontend, [MongoDB](https://www.mongodb.com/) for storing and [Firebase](https://firebase.google.com) for authentication and Log in functionality.
 
 
 ## Installation
