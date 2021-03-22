@@ -19,12 +19,17 @@ class Mongo:
 class Blockchain(object):
   
   def __init__(self):
-    self.chain = self.init__chain()
+    self.conn = Mongo()
+    if [x for x in self.conn.db.blocks.find()] != []:
+      self.chain = []
+      self.loadMongo()
+    else:
+      self.chain = self.init__chain()
+      self.saveBlockMongo(self.chain[0])
     self.pendingTransactions = []
     self.difficulty = 4
     self.minerRewards = 5
     self.blockSize = 20
-    self.conn = Mongo()
 
   def __str__(self):
     return "#".join(str(block) for block in reversed(self.chain) if self.chain != [])[0:]
@@ -42,10 +47,17 @@ class Blockchain(object):
   def loadMongo(self):
     try:
       chain = self.conn.db.blocks.find()
-      print(chain)
+      for block in chain:
+        newBlock = self.jsonDecodeBlock(block)
+        self.addBlock(newBlock)
     except Exception as e:
       return e
-    pass
+
+  def jsonDecodeBlock(self, block):
+    temp_block = Block([Transaction(block['sender'], block['receiver'], int(block['amount']))], block['time'], block['index'])
+    temp_block.hash = block['hash']
+    temp_block.previous_hash = block['prevHash']
+    return temp_block
 
   def jsonEncodeBlock(self, block):
     JSONblock = {
@@ -65,7 +77,6 @@ class Blockchain(object):
   def init__chain(self):
     first_block = Block([Transaction('admin', 'admin', 10)], TIME(), 0)
     first_block.previous_hash = 'None'
-    self.saveBlockMongo(first_block)
     return [first_block]
 
   def getLastBlock(self):
@@ -123,7 +134,7 @@ class Blockchain(object):
           newBlock = Block([transaction], TIME(), len(self.chain))
           newBlock.previous_hash = self.getLastBlock().hash
           newBlock.mine(self.difficulty)
-          self.chain.append(newBlock)
+          self.addBlock(newBlock)
           self.pendingTransactions = [Transaction("Miner Rewards", miner, self.minerRewards)]
           return 'OK'
         else:
