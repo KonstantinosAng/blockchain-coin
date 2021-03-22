@@ -54,7 +54,7 @@ function Home() {
       <div className="home__finished">
         <h2> Completed Transactions </h2>
         {chain.map((element) => (
-          <div onMouseOut={()=>handleOverlayHide(element)} onMouseOver={()=>handleOverlayShow(element)} onClick={()=>handleBlockDetail(element)} className={`home__block home__block${element.split("%")[0]}`}>
+          <div key={`home__block${element.split("%")[0]}`} onMouseOut={()=>handleOverlayHide(element)} onMouseOver={()=>handleOverlayShow(element)} onClick={()=>handleBlockDetail(element)} className={`home__block home__block${element.split("%")[0]}`}>
             <h2> Block {element.split("%")[0]} </h2>
             <h3 id={`hashSender${element.split("%")[0]}`}> Hash </h3>
             <h5 id={`hashSenderValue${element.split("%")[0]}`}> {truncate_string(element.split("%")[1], 20)} </h5>

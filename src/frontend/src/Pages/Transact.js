@@ -37,19 +37,32 @@ function Transact() {
     const r = document.getElementsByClassName('transact__receiver')[0].value;
     const a = document.getElementsByClassName('transact__amount')[0].value;
     const k = user.publicKey;
-    await axios.post('/transact', {headers: {"Access-Control-Allow-Origin": "*"}, sender: s, receiver: r, amount: a, key: k}).then((res)=>console.log(res))
+    await axios.post('/transact', {headers: {"Access-Control-Allow-Origin": "*"}, sender: s, receiver: r, amount: a, key: k}).then((res)=> {
+      if (res.data === 'OK') {
+        document.getElementById('transact__message').innerText = 'Transaction added!';
+        document.getElementById('transact__message').style.backgroundColor = 'limegreen';
+        document.getElementById('transact__message').style.display = 'flex';
+        document.getElementById('transact__message').style.animation = 'fadeOut 2s';
+      } else {
+        document.getElementById('transact__message').innerText = 'Transaction failed!';
+        document.getElementById('transact__message').style.backgroundColor = 'rosybrown';
+        document.getElementById('transact__message').style.display = 'flex';
+        document.getElementById('transact__message').style.animation = 'fadeOut 2s';
+      }
+    })
   }
 
   return (
     <div className="transact__root">
       <div className="transact__container">
         <h2> Sender </h2>
-        <input className="transact__sender" required/>
+        <input value={user.displayName} className="transact__sender" required/>
         <h2> Receiver </h2>
         <input className="transact__receiver" required/>
         <h2> Amount </h2>
         <input className="transact__amount" required/>
         <button onClick={(e)=>handleSubmit(e)} className="transact__button"> Transact </button>
+        <h3 id="transact__message" className="transaction__message"> Transaction added! </h3>
       </div>
     </div>
   )

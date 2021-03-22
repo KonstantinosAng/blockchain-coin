@@ -9,7 +9,9 @@ import re
 app = Flask(__name__)
 
 bchain = Blockchain()
-block = Block([Transaction("me", "admin", 100)], TIME(), 1)
+block = Block([Transaction("me", "admin", 10000)], TIME(), 1)
+bchain.addBlock(block)
+block = Block([Transaction("admin", "Kwstantinos Angelopoulos", 10000)], TIME(), 2)
 bchain.addBlock(block)
 
 @app.route("/")
@@ -25,8 +27,8 @@ def getBalance():
     person = request.json['data']
     balance = bchain.get_balance(person)
     return balance
-  except Exception:
-    return 'Error 400!'
+  except Exception as e:
+    return e
 
 @app.route("/transact", methods=['POST'])
 def transact():
@@ -47,6 +49,13 @@ def generateKeys():
 @app.route("/pendingTransactions")
 def pending():
   return str(bchain.getPendingTransactions())
+
+@app.route("/mining", methods=['POST'])
+def mining():
+  _hash = request.json['hash']
+  miner = request.json['miner']
+  ret = bchain.mineBlock(_hash, miner)
+  return ret
 
 if __name__ == "__main__":
   app.run(port=3000, debug=True)

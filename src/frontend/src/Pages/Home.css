@@ -5,6 +5,11 @@
   flex-direction: column;
   justify-content: space-evenly;
   flex: .5;
+  box-sizing: border-box;
+}
+
+.home__finished {
+  height: 100%;
 }
 
 .home__finished > h2 {

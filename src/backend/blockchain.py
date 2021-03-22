@@ -53,20 +53,18 @@ class Blockchain(object):
     return f"{key.publickey().export_key().decode('ASCII')}${key.export_key().decode('ASCII')}"
   
   def get_balance(self, person):
-    balance = 0
-    for i in range(1, len(self.chain)):
-      block = self.chain[i]
-      try:
-        for j in range(len(block.transactions)):
-          transaction = block.transactions[j]
+    try:
+      balance = 0
+      for block in self.chain:
+        for transaction in block.transactions:
+          print(transaction.sender, transaction.receiver, transaction.amount, person)
           if transaction.sender == person:
-            balance -= transaction.amount
+            balance -= int(transaction.amount)
           if transaction.receiver == person:
-            balance += transaction.amount
-      except Exception as e:
-        return None
-    
-    return f'{person.title()} balance -> {balance}'
+            balance += int(transaction.amount)
+      return f'{person.title()} balance -> {balance}'
+    except Exception as e:
+      return e
 
   def isValidChain(self):
     for i in range(1, len(self.chain)):
@@ -79,6 +77,23 @@ class Blockchain(object):
         return False
     
     return True
+  
+  def mineBlock(self, _hash, miner):
+    print(self.chain)
+    try:
+      for transaction in self.pendingTransactions:
+        if transaction.hash == _hash:
+          newBlock = Block([transaction], TIME(), len(self.chain))
+          newBlock.previous_hash = self.getLastBlock().hash
+          newBlock.mine(self.difficulty)
+          self.chain.append(newBlock)
+          print(self.chain)
+          self.pendingTransactions = [Transaction("Miner Rewards", miner, self.minerRewards)]
+          return 'OK'
+        else:
+          return 'Error 400!'
+    except Exception as e:
+      return e
 
   def pendingTransaction(self, miner):
     nPending = len(self.pendingTransactions)
@@ -154,6 +169,7 @@ class Block(object):
 
   def calculate_hash(self):
     hashTransactions = ""
+
     for transaction in self.transactions:
       hashTransactions += transaction.hash
     

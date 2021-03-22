@@ -42,20 +42,29 @@ function App() {
   }, [user])
 
   useEffect(() => {
-    const authorization = auth.onAuthStateChanged((Auth) => {
-      if (Auth) {
-        dispatch({
-          type: actionTypes.SET_USER,
-          user: Auth
-        })
-      } else {
-        dispatch({
-          type: actionTypes.UNSET_USER,
-          user: null
-        })
-      }
-    })
-    return authorization;
+    if (localStorage.getItem('user')) {
+      dispatch({
+        type: actionTypes.SET_USER,
+        user: JSON.parse(localStorage.getItem('user'))
+      });
+    } else {
+      const authorization = auth.onAuthStateChanged((Auth) => {
+        if (Auth) {
+          dispatch({
+            type: actionTypes.SET_USER,
+            user: Auth
+          });
+          localStorage.setItem('user', JSON.stringify(Auth));
+        } else {
+          dispatch({
+            type: actionTypes.UNSET_USER,
+            user: null
+          });
+          localStorage.removeItem('user');
+        }
+      })
+      return authorization;
+    }
   }, [])
 
   return (
