@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from blockchain import Blockchain, Transaction, Block, TIME
+from blockchain import Blockchain, Transaction, Block, TIME, Mongo
 import json
 from Crypto.PublicKey import RSA
 import os

@@ -5,9 +5,16 @@ from Crypto.PublicKey import RSA
 from Crypto.Signature import PKCS1_v1_5 as pkcs1_15
 import requests
 from urllib.parse import urlparse
+from pymongo import MongoClient
 
 
 TIME = lambda :datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
+
+class Mongo:
+
+  def __init__(self):
+    self.client = MongoClient('mongodb://localhost:27017') 
+    self.db = self.client['blockchain']
 
 class Blockchain(object):
   
@@ -17,9 +24,40 @@ class Blockchain(object):
     self.difficulty = 4
     self.minerRewards = 5
     self.blockSize = 20
+    self.conn = Mongo()
 
   def __str__(self):
     return "#".join(str(block) for block in reversed(self.chain) if self.chain != [])[0:]
+
+  def saveBlockMongo(self, block):
+    try:
+      search = self.conn.db.blocks.find_one({'hash': block.hash})
+      if search is None:
+        encodedBlock = self.jsonEncodeBlock(block)
+        self.conn.db.blocks.insert_one(encodedBlock)
+      return True
+    except Exception as e:
+      return e
+
+  def loadMongo(self):
+    try:
+      chain = self.conn.db.blocks.find()
+      print(chain)
+    except Exception as e:
+      return e
+    pass
+
+  def jsonEncodeBlock(self, block):
+    JSONblock = {
+        'index': block.index,
+        'hash': block.hash,
+        'prevHash': block.previous_hash,
+        'time': block.time,
+        'sender': block.transactions[0].sender,
+        'receiver': block.transactions[0].receiver,
+        'amount': block.transactions[0].amount
+      }
+    return JSONblock
 
   def getPendingTransactions(self):    
     return "#".join(str(transaction) for transaction in self.pendingTransactions)[0:]
@@ -27,6 +65,7 @@ class Blockchain(object):
   def init__chain(self):
     first_block = Block([Transaction('admin', 'admin', 10)], TIME(), 0)
     first_block.previous_hash = 'None'
+    self.saveBlockMongo(first_block)
     return [first_block]
 
   def getLastBlock(self):
@@ -38,6 +77,7 @@ class Blockchain(object):
     else:
       block.previous_hash = "none"
     self.chain.append(block)
+    self.saveBlockMongo(block)
   
   def generate_keys(self):
     key = RSA.generate(2048)
@@ -126,7 +166,6 @@ class Blockchain(object):
   def conflicts(self):
     try:
       for i in range(len(self.chain)-1):
-        print(self.chain[i].hash)
         if self.chain[i].hash == self.chain[i+1].hash:
           self.chain.pop(i)
     except Exception as e:
