@@ -78,7 +78,6 @@ function Mine() {
     await axios.get('/pendingTransactions', {headers: {"Access-Control-Allow-Origin": "*"}}).then((res) => {
       setData(res.data.split("#"))
     });
-    document.getElementsByClassName(`mine__block__overlay${hash}`)[0].style.opacity = '1';
   }
 
   return (

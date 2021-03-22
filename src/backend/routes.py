@@ -55,7 +55,8 @@ def mining():
   _hash = request.json['hash']
   miner = request.json['miner']
   ret = bchain.mineBlock(_hash, miner)
-  return ret
+  return str(ret)
+
 
 if __name__ == "__main__":
   app.run(port=3000, debug=True)
