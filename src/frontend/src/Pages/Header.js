@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import './Header.css';
 import { useStateValue } from '../extras/stateProvider.js';
 import { actionTypes } from '../extras/reducer.js';
+import { auth } from '../extras/firebase.js';
 
 function Header() {
 
@@ -18,6 +19,7 @@ function Header() {
   }, [])
 
   const signOut = () => {
+	auth.signOut();
     dispatch({
       type: actionTypes.UNSET_USER
     })
