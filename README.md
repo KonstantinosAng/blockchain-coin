@@ -2,6 +2,21 @@
 
 A full fledged blockchain coin named cray with [Flask](https://flask.palletsprojects.com/en/1.1.x/) for backend, [ReactJS](https://reactjs.org/) for frontend, [MongoDB](https://www.mongodb.com/) for storing and [Firebase](https://firebase.google.com) for authentication and Log in functionality.
 
+## Requirements
+
+Inside the frontend repo there is a [.env.example file](./src/frontend/.env.example). Rename it to .env and fill the values with your own api keys.
+
+For firebase you will need a firebase config file from your webapp with the following values.
+
+```javascript
+REACT_APP_FIREBASE_API_KEY=
+REACT_APP_FIREBASE_AUTH_DOMAIN=
+REACT_APP_FIREBASE_PROJECT_ID=
+REACT_APP_FIREBASE_STORAGE_BUCKET=
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID=
+REACT_APP_FIREBASE_APP_ID=
+REACT_APP_FIREBASE_MEASUREMENT_ID=
+```
 
 ## Installation
 
