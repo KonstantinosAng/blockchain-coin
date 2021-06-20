@@ -19,7 +19,8 @@ function Header() {
   }, [])
 
   const signOut = () => {
-	auth.signOut();
+    localStorage.removeItem('user');
+	  auth.signOut();
     dispatch({
       type: actionTypes.UNSET_USER
     })
