@@ -7,7 +7,9 @@ import { useStateValue } from '../extras/stateProvider.js';
 function Mine() {
 
   const [data, setData] = useState([])
+  // eslint-disable-next-line
   const [overlay, setOverlay] = useState(false)
+  // eslint-disable-next-line
   const [{user}, dispatch] = useStateValue();
 
   useEffect(() => {
@@ -30,7 +32,7 @@ function Mine() {
       })
     }    
     getBalanceData()
-  }, [])
+  }, [user.displayName])
 
   function truncate_string(str, n) {
     return str?.length > n ? str.substr(0, n - 1) + "..." + str.substr(str.length-20, str.length): str;
@@ -63,8 +65,8 @@ function Mine() {
     document.getElementsByClassName(`mine__block__success${hash}`)[0].innerText = 'Mining...';
     document.getElementsByClassName(`mine__block__success${hash}`)[0].style.display = 'flex';
     await axios.post('/mining', {headers: {"Access-Control-Allow-Origin": "*"}, hash: hash, miner: user.displayName}).then((res)=> {
-      console.log(res.data == 'OK');
-      if (!res.data == 'OK') {
+      console.log(res.data === 'OK');
+      if (!res.data === 'OK') {
         document.getElementsByClassName(`mine__block__success${hash}`)[0].style.display = 'none';
       }
     })

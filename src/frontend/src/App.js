@@ -65,7 +65,7 @@ function App() {
       })
       return authorization;
     }
-  }, [])
+  }, [dispatch])
 
   return (
     <div className="app">

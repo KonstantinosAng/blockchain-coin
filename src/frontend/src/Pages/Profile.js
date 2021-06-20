@@ -4,7 +4,7 @@ import { useStateValue } from '../extras/stateProvider.js';
 import axios from 'axios';
 
 function Profile() {
-
+  //eslint-disable-next-line
   const [{user}, dispatch] = useStateValue();
   const [ammount, setAmmount] = useState('');
   const [signedName, setSignedName] = useState('');
@@ -25,7 +25,7 @@ function Profile() {
       })
     }    
     getBalanceData()
-  }, [])
+  }, [user.displayName])
 
   return (
     <div className="profile__root">

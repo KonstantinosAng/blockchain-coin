@@ -40,7 +40,6 @@ function Home() {
   }
 
   function handleOverlayShow(element) {
-    const blockId = element.split("%")[0];
     document.getElementsByClassName(`home__block__overlay${element.split("%")[0]}`)[0].style.display = 'flex';
     document.getElementsByClassName(`home__block${element.split("%")[0]}`)[0].style.color = 'rgba(255, 255, 255, 10%)';
 

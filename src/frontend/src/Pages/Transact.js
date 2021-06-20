@@ -5,7 +5,7 @@ import { useStateValue } from '../extras/stateProvider.js';
 
 
 function Transact() {
-
+  //eslint-disable-next-line
   const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function Transact() {
       }
     }
     keys()
-  }, [])
+  }, [user])
 
   async function handleSubmit(event) {
     event.preventDefault();

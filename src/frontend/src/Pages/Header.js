@@ -5,7 +5,7 @@ import { actionTypes } from '../extras/reducer.js';
 import { auth } from '../extras/firebase.js';
 
 function Header() {
-
+  //eslint-disable-next-line
   const [{user}, dispatch] = useStateValue();
 
   useEffect(() => {

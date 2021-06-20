@@ -6,8 +6,8 @@ import { useStateValue } from '../extras/stateProvider.js';
 
 
 function Login() {
-
-  const [state, dispatch] = useStateValue();
+  // eslint-disable-next-line
+  const [_, dispatch] = useStateValue();
 
   function handleLogin() {
     auth.signInWithPopup(provider)
