@@ -9,9 +9,9 @@ function Home() {
 
   useEffect(() => {
     async function getData() {
-      await axios.get('/home', {headers: {"Access-Control-Allow-Origin": "*"}}).then((response)=>{
+      await axios.get(`${process.env.REACT_APP_SERVER_URL}/home`, {headers: {"Access-Control-Allow-Origin": "*"}}).then((response)=>{
         setChain(response.data.split("#"));
-      })
+      }).catch(error => console.error(error))
     }
     getData();
   }, [])

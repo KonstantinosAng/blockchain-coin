@@ -14,22 +14,22 @@ function Mine() {
 
   useEffect(() => {
     async function getPendingTransacs() {
-      await axios.get('/pendingTransactions', {headers: {"Access-Control-Allow-Origin": "*"}}).then((res) => {
+      await axios.get(`${process.env.REACT_APP_SERVER_URL}/pendingTransactions`, {headers: {"Access-Control-Allow-Origin": "*"}}).then((res) => {
         setData(res.data.split("#"))
-      })
+      }).catch(error => console.error(error))
     }
     getPendingTransacs()
   }, [])
 
   useEffect(() => {
     async function getBalanceData() {
-      await axios.post('/balance', {headers: {"Access-Control-Allow-Origin": "*"}, data: user.displayName}).then(res=> {
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/balance`, {headers: {"Access-Control-Allow-Origin": "*"}, data: user.displayName}).then(res=> {
         var amount = 0;
         if (res.data.length >= 0) {
           amount = res.data.replace(user.displayName, "").replace("->", "").replace("balance", "").trim()
         }
         localStorage.setItem('balance', JSON.stringify(amount))
-      })
+      }).catch(error => console.error(error))
     }    
     getBalanceData()
   }, [user.displayName])

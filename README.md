@@ -6,6 +6,12 @@ A full fledged blockchain coin named cray with [Flask](https://flask.palletsproj
 
 Inside the frontend repo there is a [.env.example file](./src/frontend/.env.example). Rename it to .env and fill the values with your own api keys.
 
+For the flask app replace with the URL the server runs on:
+
+```javascript
+REACT_APP_SERVER_URL=http://localhost:5000
+```
+
 For firebase you will need a firebase config file from your webapp with the following values.
 
 ```javascript
@@ -34,7 +40,7 @@ You will also need a firebase account to enable the authentication. Create a new
 Inside the [backend folder](src/backend) run the following code to start the backend server where all the blockchain and the transactions are happening.
 
 ```
-flask run
+flask run -h localhost -p 9999
 ```
 
 Assuming you have [npm](https://www.npmjs.com/) installed, inside the [frontend folder](src/frontend) run the following code to start the frontend page.

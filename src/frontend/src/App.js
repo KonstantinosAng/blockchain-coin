@@ -23,14 +23,14 @@ function App() {
       if (user) {
         if (!localStorage.getItem('PubKey')) {
           if (!user.publicKey) {
-            await axios.get('/generate_keys', {headers: {"Access-Control-Allow-Origin": "*"}}).then(res=> {
+            await axios.get(`${[process.env.REACT_APP_SERVER_URL]}/generate_keys`, {headers: {"Access-Control-Allow-Origin": "*"}}).then(res=> {
               const pubKey = res.data.split("$")[0];
               const priKey = res.data.split("$")[1];
               user.publicKey = pubKey;
               user.privateKey = priKey;
               localStorage.setItem('PubKey', JSON.stringify(pubKey))
               localStorage.setItem('PriKey', JSON.stringify(priKey))
-            })
+            }).catch(error => console.error(error))
           }
         } else {
           user.publicKey = localStorage.getItem('PubKey');

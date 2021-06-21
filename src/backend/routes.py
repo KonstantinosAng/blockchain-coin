@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from flask_cors import CORS
 from blockchain import Blockchain, Transaction, Block, TIME, Mongo
 import json
 from Crypto.PublicKey import RSA
@@ -7,7 +8,7 @@ import re
 
 
 app = Flask(__name__)
-
+CORS(app)
 bchain = Blockchain()
 
 @app.route("/")

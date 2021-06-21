@@ -11,7 +11,7 @@ function Profile() {
 
   useEffect(() => {
     async function getBalanceData() {
-      await axios.post('/balance', {headers: {"Access-Control-Allow-Origin": "*"}, data: user.displayName}).then(res=> {
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/balance`, {headers: {"Access-Control-Allow-Origin": "*"}, data: user.displayName}).then(res=> {
         var amount = 0;
         if (res.data.length >= 0) {
           amount = res.data.replace(user.displayName, "").replace("->", "").replace("balance", "").trim()
@@ -22,7 +22,7 @@ function Profile() {
           setAmmount(amount);
         }
         localStorage.setItem('balance', JSON.stringify(amount))
-      })
+      }).catch(error => console.error(error))
     }    
     getBalanceData()
   }, [user.displayName])
