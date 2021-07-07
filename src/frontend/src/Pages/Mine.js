@@ -64,7 +64,7 @@ function Mine() {
     });
     document.getElementsByClassName(`mine__block__success${hash}`)[0].innerText = 'Mining...';
     document.getElementsByClassName(`mine__block__success${hash}`)[0].style.display = 'flex';
-    await axios.post('/mining', {headers: {"Access-Control-Allow-Origin": "*"}, hash: hash, miner: user.displayName}).then((res)=> {
+    await axios.post(`${process.env.REACT_APP_SERVER_URL}/mining`, {headers: {"Access-Control-Allow-Origin": "*"}, hash: hash, miner: user.displayName}).then((res)=> {
       console.log(res.data === 'OK');
       if (!res.data === 'OK') {
         document.getElementsByClassName(`mine__block__success${hash}`)[0].style.display = 'none';
@@ -74,7 +74,7 @@ function Mine() {
     Array.from(document.getElementsByClassName(`overlay__h5${hash}`)).forEach(h5 => {
       h5.style.color = 'mediumpurple';
     });
-    await axios.get('/pendingTransactions', {headers: {"Access-Control-Allow-Origin": "*"}}).then((res) => {
+    await axios.get(`${process.env.REACT_APP_SERVER_URL}/pendingTransactions`, {headers: {"Access-Control-Allow-Origin": "*"}}).then((res) => {
       setData(res.data.split("#"))
     });
     window.location.reload();

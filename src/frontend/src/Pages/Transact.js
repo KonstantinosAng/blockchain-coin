@@ -38,13 +38,13 @@ function Transact() {
     const a = document.getElementsByClassName('transact__amount')[0].value;
     const k = user.publicKey;
     const balance = JSON.parse(localStorage.getItem('balance'));
-    if (parseFloat(a) > balance) {
+    if (parseFloat(a) > parseFloat(balance)) {
       document.getElementById('transact__message').innerText = 'Not enough coins!';
       document.getElementById('transact__message').style.backgroundColor = 'rosybrown';
       document.getElementById('transact__message').style.display = 'flex';
       document.getElementById('transact__message').style.animation = 'fadeOut 5s';
     } else {
-      await axios.post('/transact', {headers: {"Access-Control-Allow-Origin": "*"}, sender: s, receiver: r, amount: a, key: k}).then((res)=> {
+      await axios.post(`${process.env.REACT_APP_SERVER_URL}/transact`, {headers: {"Access-Control-Allow-Origin": "*"}, sender: s, receiver: r, amount: a, key: k}).then((res)=> {
         if (res.data === 'OK') {
           document.getElementById('transact__message').innerText = 'Transaction added!';
           document.getElementById('transact__message').style.backgroundColor = 'limegreen';
