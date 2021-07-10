@@ -3,6 +3,7 @@
 A full fledged blockchain coin named cray with [Flask](https://flask.palletsprojects.com/en/1.1.x/) for backend, [ReactJS](https://reactjs.org/) for frontend, [MongoDB](https://www.mongodb.com/) for storing and [Firebase](https://firebase.google.com) for authentication and Log in functionality.
 
 <p align="center">
+  <h1>↓</h1>
   <a href="http://kangelopoulos.ddns.net/craycoin"> See demo here </a>
 </p>
 
