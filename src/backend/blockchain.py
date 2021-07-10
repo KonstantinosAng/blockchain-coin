@@ -108,9 +108,9 @@ class Blockchain(object):
       for block in self.chain:
         for transaction in block.transactions:
           if transaction.sender == person:
-            balance -= int(transaction.amount)
+            balance -= float(transaction.amount)
           if transaction.receiver == person:
-            balance += int(transaction.amount)
+            balance += float(transaction.amount)
       return f'{person.title()} balance -> {balance}'
     except Exception as e:
       return e
