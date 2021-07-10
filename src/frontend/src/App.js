@@ -72,7 +72,7 @@ function App() {
       {!user ? <Login /> :
       <>
         <Header />
-        <Router>
+        <Router basename="/craycoin">
           <Switch>
             <Route path='/' exact component={Home}/>
             <Route path='/home' exact component={Home}/>

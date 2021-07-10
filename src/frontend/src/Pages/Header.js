@@ -7,13 +7,12 @@ import { auth } from '../extras/firebase.js';
 function Header() {
   //eslint-disable-next-line
   const [{user}, dispatch] = useStateValue();
-
   useEffect(() => {
     var path;
-    if (window.location.pathname === '/') {
+    if (window.location.pathname.replace('/craycoin', '') === '/' || window.location.pathname.replace('/craycoin', '') === "") {
       path = 'home';
     } else {
-      path = window.location.pathname.replace('/', "");
+      path = window.location.pathname.replace('/craycoin', '').replace('/', "");
     }
     document.getElementById('header__'+path).style.color = 'mediumslateblue';
   }, [])
@@ -32,10 +31,10 @@ function Header() {
 
   return (
     <div className="header__root">
-      <h1 id="header__home" onClick={()=>redirect('/home')}> Home </h1>
-      <h1 id="header__transact" onClick={()=>redirect('/transact')}> Transact </h1>
-      <h1 id="header__mine" onClick={()=>redirect('/mine')}> Mine </h1>
-      <h1 id="header__profile" onClick={()=>redirect('/profile')}> Profile </h1>
+      <h1 id="header__home" onClick={()=>redirect('/craycoin/home')}> Home </h1>
+      <h1 id="header__transact" onClick={()=>redirect('/craycoin/transact')}> Transact </h1>
+      <h1 id="header__mine" onClick={()=>redirect('/craycoin/mine')}> Mine </h1>
+      <h1 id="header__profile" onClick={()=>redirect('/craycoin/profile')}> Profile </h1>
       <h1 onClick={signOut}> Log out </h1>
     </div>
   )
