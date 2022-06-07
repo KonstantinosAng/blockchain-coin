@@ -7,4 +7,4 @@ RUN pip3 install -r requirements.txt
 
 COPY . .
 
-RUN python3 routes.py
+CMD python3 routes.py
