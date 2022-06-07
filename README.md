@@ -13,7 +13,7 @@ Inside the frontend repo there is a [.env.example file](./src/frontend/.env.exam
 For the flask app replace with the URL the server runs on:
 
 ```javascript
-REACT_APP_SERVER_URL=http://localhost:5000
+REACT_APP_SERVER_URL=http://localhost:5000/craycoinAPI
 ```
 
 For firebase you will need a firebase config file from your webapp with the following values.
@@ -39,7 +39,6 @@ pip install -r requirements.txt
 You will also need a firebase account to enable the authentication. Create a new web project with the firebase console, enable the Google auth log in from the options and create a .env file in the [frontend folder](src/frontend) as the [.env.example file](src/frontend/.env.example) and put the firebase config file values in the REACT_APP variables.
 
 ## Usage
-
 
 Inside the [backend folder](src/backend) run the following code to start the backend server where all the blockchain and the transactions are happening.
 
