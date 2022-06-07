@@ -6,19 +6,20 @@ from Crypto.PublicKey import RSA
 import os
 import re
 
+BASE_PATH = "/craycoinAPI"
 
 app = Flask(__name__)
 CORS(app)
 bchain = Blockchain()
 
-@app.route("/")
-@app.route("/home")
+@app.route("{}".format(BASE_PATH))
+@app.route("{}/home".format(BASE_PATH))
 def home():
   bchain.conflicts()
   return str(bchain)
 
 
-@app.route("/balance", methods=['POST'])
+@app.route("{}/balance".format(BASE_PATH), methods=['POST'])
 def getBalance():
   try:
     person = request.json['data']
@@ -27,7 +28,7 @@ def getBalance():
   except Exception as e:
     return e
 
-@app.route("/transact", methods=['POST'])
+@app.route("{}/transact".format(BASE_PATH), methods=['POST'])
 def transact():
   try:
     sender = request.json['sender']
@@ -39,15 +40,15 @@ def transact():
   except Exception:
     return 'Error 400!'
 
-@app.route("/generate_keys")
+@app.route("{}/generate_keys".format(BASE_PATH))
 def generateKeys():
   return bchain.generate_keys()
 
-@app.route("/pendingTransactions")
+@app.route("{}/pendingTransactions".format(BASE_PATH))
 def pending():
   return str(bchain.getPendingTransactions())
 
-@app.route("/mining", methods=['POST'])
+@app.route("{}/mining".format(BASE_PATH), methods=['POST'])
 def mining():
   _hash = request.json['hash']
   miner = request.json['miner']
