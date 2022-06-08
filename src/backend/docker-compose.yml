@@ -1,0 +1,15 @@
+version: "2.2"
+services:
+  cray_coin_api:
+    # network_mode: "host"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cray_coin_api
+    container_name: cray_coin_api
+    restart: always
+    ports:
+      - 5000:5000
+    # environment:
+    #   env_file:
+    #     - ./.flaskenv
