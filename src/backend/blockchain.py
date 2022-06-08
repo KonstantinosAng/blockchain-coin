@@ -13,7 +13,7 @@ TIME = lambda :datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
 class Mongo:
 
   def __init__(self):
-    self.client = MongoClient('localhost:27017') 
+    self.client = MongoClient('mongodb://127.0.0.1:27017') 
     self.db = self.client['blockchain']
 
 class Blockchain(object):
