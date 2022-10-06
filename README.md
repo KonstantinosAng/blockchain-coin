@@ -3,8 +3,10 @@
 A full fledged blockchain coin named cray with [Flask](https://flask.palletsprojects.com/en/1.1.x/) for backend, [ReactJS](https://reactjs.org/) for frontend, [MongoDB](https://www.mongodb.com/) for storing and [Firebase](https://firebase.google.com) for authentication and Log in functionality.
 
 <div align="center">
-  <h1><a href="https://constantine.dev:8080/craycoin"> DEMO </a></h1>
+  <h1><a href="https://craycoin.constantine.dev"> DEMO </a></h1>
 </div>
+
+Backend deployed to -> https://craycoin.herokuapp.com/
 
 ## Requirements
 
@@ -59,6 +61,16 @@ mongod
 ```
 
 If it is installed you will see a big output. More info in [MongoDB/Installation](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/).
+
+## Deploy backend to heroku
+
+From the root of the repo
+
+```bash
+heroku create -a craycoin
+heroku git:remote -a craycoin
+git subtree push --prefix src/backend heroku master
+```
 
 ## Example
 
