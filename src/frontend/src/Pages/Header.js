@@ -8,13 +8,14 @@ function Header() {
   //eslint-disable-next-line
   const [{ user }, dispatch] = useStateValue();
   useEffect(() => {
-    var path;
+    let path;
     if (window.location.pathname === "/" || window.location.pathname === "") {
       path = "home";
     } else {
       path = window.location.pathname;
     }
-    document.getElementById("header__" + path).style.color = "mediumslateblue";
+    document.getElementById("header__" + path.replace("/", "")).style.color =
+      "mediumslateblue";
   }, []);
 
   const signOut = () => {
