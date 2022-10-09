@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 MONGODB_URI = os.environ['MONGODB_URI'] if os.environ['MONGODB_URI'] else 'mongodb://127.0.0.1:27017'
-print(MONGODB_URI)
+
 TIME = lambda :datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
 
 class Mongo:
