@@ -6,14 +6,19 @@ from Crypto.Signature import PKCS1_v1_5 as pkcs1_15
 import requests
 from urllib.parse import urlparse
 from pymongo import MongoClient
+import os
+from dotenv import dotenv_values
 
+config = dotenv_values(".env")
+
+MONGODB_URI = config['MONGODB_URI'] if config['MONGODB_URI'] else 'mongodb://127.0.0.1:27017'
 
 TIME = lambda :datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
 
 class Mongo:
 
   def __init__(self):
-    self.client = MongoClient('mongodb://127.0.0.1:27017') 
+    self.client = MongoClient(MONGODB_URI) 
     self.db = self.client['blockchain']
 
 class Blockchain(object):

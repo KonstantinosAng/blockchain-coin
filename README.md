@@ -30,6 +30,12 @@ REACT_APP_FIREBASE_APP_ID=
 REACT_APP_FIREBASE_MEASUREMENT_ID=
 ```
 
+Inside the backend repo there is a [.env.example file](./src/backend/.env.example). Rename it to .env and fill the values with your own keys.
+
+```bash
+MONGODB_URI=
+```
+
 ## Installation
 
 Start with a fresh installation of python, preferably using Anaconda, and then inside the blockchain-folder run the following line to install all python required dependencies.
@@ -71,6 +77,17 @@ heroku create -a craycoin
 heroku git:remote -a craycoin
 git subtree push --prefix src/backend heroku master
 ```
+
+Set up environmental configs
+
+```bash
+heroku config:set MONGODB_URI=joesmith
+heroku config:set PORT=9999
+```
+
+## ATLAS MongoDB
+
+See instructions [`here`](https://gist.github.com/ross-u/b59ea6a1febefb80bffc15ecf31ea827) on how to setup a free atlas mongodb.
 
 ## Example
 
