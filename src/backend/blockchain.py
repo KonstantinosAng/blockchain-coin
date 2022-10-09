@@ -7,12 +7,12 @@ import requests
 from urllib.parse import urlparse
 from pymongo import MongoClient
 import os
-from dotenv import dotenv_values
+from dotenv import load_dotenv
 
-config = dotenv_values(".env")
+load_dotenv()
 
-MONGODB_URI = config['MONGODB_URI'] if config['MONGODB_URI'] else 'mongodb://127.0.0.1:27017'
-
+MONGODB_URI = os.environ['MONGODB_URI'] if os.environ['MONGODB_URI'] else 'mongodb://127.0.0.1:27017'
+print(MONGODB_URI)
 TIME = lambda :datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
 
 class Mongo:
