@@ -6,7 +6,9 @@ A full fledged blockchain coin named cray with [Flask](https://flask.palletsproj
   <h1><a href="https://craycoin.constantine.dev"> DEMO </a></h1>
 </div>
 
-Backend deployed to -> https://craycoin.herokuapp.com/
+<!-- Backend deployed to -> https://craycoin.herokuapp.com/ -->
+
+Backend deployed to -> https://craycoin.onrender.com/
 
 ## Requirements
 
