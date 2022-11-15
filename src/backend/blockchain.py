@@ -3,7 +3,6 @@ import json
 import hashlib
 from Crypto.PublicKey import RSA
 from Crypto.Signature import PKCS1_v1_5 as pkcs1_15
-import requests
 from urllib.parse import urlparse
 from pymongo import MongoClient
 import os

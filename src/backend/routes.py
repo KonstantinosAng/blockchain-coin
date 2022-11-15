@@ -1,10 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, request
 from flask_cors import CORS
-from blockchain import Blockchain, Transaction, Block, TIME, Mongo
-import json
+from blockchain import Blockchain
 from Crypto.PublicKey import RSA
-import os
-import re
 
 BASE_PATH = "/craycoinAPI"
 
